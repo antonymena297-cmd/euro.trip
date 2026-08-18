@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-night text-frost font-body antialiased;
+    background-image:
+      radial-gradient(ellipse at top, rgba(227,168,87,.07), transparent 55%),
+      radial-gradient(ellipse at bottom, rgba(31,58,52,.35), transparent 60%);
+  }
+  h1, h2, h3, h4 { @apply font-display; }
+  :focus-visible { outline: 3px solid theme('colors.amber.DEFAULT'); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+}
+
+@layer components {
+  /* Divisor de sección con silueta de cordillera — el elemento firma del diseño */
+  .ridge-divider {
+    @apply bg-ridge bg-no-repeat bg-cover w-full h-14 md:h-20;
+  }
+
+  /* "Cinta de ruta": línea punteada tipo mapa de senderos, usada en timelines */
+  .route-ribbon {
+    background-image: repeating-linear-gradient(
+      to bottom, theme('colors.amber.DEFAULT') 0 6px, transparent 6px 14px
+    );
+    width: 2px;
+  }
+
+  .card-lodge {
+    @apply bg-night-2/80 border border-white/10 rounded-2xl shadow-lodge backdrop-blur-sm;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1 text-xs font-mono uppercase tracking-wide text-slate2;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-xl bg-amber text-night font-semibold px-4 py-2.5 hover:bg-amber-dark transition-colors;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-xl border border-white/20 text-frost px-4 py-2.5 hover:border-amber/60 hover:text-amber transition-colors;
+  }
+
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Leaflet: ajustar popups y controles al tema oscuro */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: #132436; color: #EAF2F3; border: 1px solid rgba(255,255,255,.12);
+}
+.leaflet-container { background: #0F1B2D; }
